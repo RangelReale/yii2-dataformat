@@ -31,6 +31,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asRaw($value)
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asRaw($value);
     }
 
@@ -39,6 +42,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asText($value)
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asText($value);
     }
 
@@ -47,6 +53,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asNtext($value)
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asNtext($value);
     }
 
@@ -55,6 +64,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asParagraphs($value)
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asParagraphs($value);
     }
 
@@ -63,6 +75,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asHtml($value, $config = null)
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asHtml($value, $config);
     }
 
@@ -71,6 +86,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asEmail($value, $options = [])
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asEmail($value, $options);
     }
 
@@ -79,6 +97,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asImage($value, $options = [])
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asImage($value, $options);
     }
 
@@ -87,6 +108,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asUrl($value, $options = [])
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asUrl($value, $options);
     }
 
@@ -95,6 +119,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asBoolean($value)
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asBoolean($value);
     }
 
@@ -103,6 +130,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asDate($value, $format = null)
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asDate($value, $format);
     }
 
@@ -111,6 +141,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asTime($value, $format = null)
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asTime($value, $format);
     }
 
@@ -119,6 +152,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asDatetime($value, $format = null)
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asDatetime($value, $format);
     }
 
@@ -127,6 +163,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asTimestamp($value)
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asTimestamp($value);
     }
 
@@ -135,6 +174,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asRelativeTime($value, $referenceTime = null)
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asRelativeTime($value, $referenceTime);
     }
 
@@ -143,6 +185,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asInteger($value, $options = [], $textOptions = [])
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asInteger($value, $options, $textOptions);
     }
 
@@ -151,6 +196,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asDecimal($value, $decimals = null, $options = [], $textOptions = [])
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asDecimal($value, $decimals, $options, $textOptions);
     }
 
@@ -159,6 +207,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asPercent($value, $decimals = null, $options = [], $textOptions = [])
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asPercent($value, $decimals, $options, $textOptions);
     }
 
@@ -167,6 +218,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asScientific($value, $decimals = null, $options = [], $textOptions = [])
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asScientific($value, $decimals, $options, $textOptions);
     }
 
@@ -175,6 +229,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asCurrency($value, $currency = null, $options = [], $textOptions = [])
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asCurrency($value, $currency, $options, $textOptions);
     }
 
@@ -183,6 +240,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asSpellout($value)
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asSpellout($value);
     }
 
@@ -191,6 +251,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asOrdinal($value)
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asOrdinal($value);
     }
 
@@ -199,6 +262,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asShortSize($value, $decimals = null, $options = [], $textOptions = [])
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asShortSize($value, $decimals, $options, $textOptions);
     }
 
@@ -207,6 +273,9 @@ class DataFormat extends BaseDataFormat
      */
     public function asSize($value, $decimals = null, $options = [], $textOptions = [])
     {
+        if ($value === null) {
+            return null;
+        }
         return $this->formatter->asSize($value, $decimals, $decimals, $decimals);
     }
     
