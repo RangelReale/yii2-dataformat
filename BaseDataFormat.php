@@ -574,12 +574,12 @@ class BaseDataFormat extends Component
     
     public function parseInteger($value, $options = [], $textOptions = [])
     {
-        return $value;
+        return (int)$value;
     }    
     
     public function parseDecimal($value, $decimals = null, $options = [], $textOptions = [])
     {
-        return $value;
+        return (float)$value;
     }    
     
     public function parsePercent($value, $decimals = null, $options = [], $textOptions = [])

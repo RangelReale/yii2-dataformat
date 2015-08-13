@@ -362,6 +362,29 @@ class DataFormat extends BaseDataFormat
     /**
      * @inheritdoc
      */
+    public function parseInteger($value, $options = [], $textOptions = [])
+    {
+        if ($value === null) {
+            return null;
+        }
+        
+        if ($this->_intlLoaded) {
+            $f = $this->createNumberFormatter(NumberFormatter::DECIMAL, null, $options, $textOptions);
+            $f->setAttribute(NumberFormatter::FRACTION_DIGITS, 0);
+            if (($result = $f->parse($value, NumberFormatter::TYPE_INT64)) === false) {
+                throw new InvalidParamException('Parsing integer value failed: ' . $f->getErrorCode() . ' ' . $f->getErrorMessage());
+            }
+            return (int)$result;
+        } else {
+            throw new InvalidConfigException('Parse as Decimal is only supported when PHP intl extension is installed.');
+        }
+        
+        return $value;
+    }    
+    
+    /**
+     * @inheritdoc
+     */
     public function parseDecimal($value, $decimals = null, $options = [], $textOptions = [])
     {
         if ($value === null) {
@@ -373,7 +396,7 @@ class DataFormat extends BaseDataFormat
             if (($result = $f->parse($value)) === false) {
                 throw new InvalidParamException('Parsing decimal value failed: ' . $f->getErrorCode() . ' ' . $f->getErrorMessage());
             }
-            return $result;
+            return (float)$result;
         } else {
             throw new InvalidConfigException('Parse as Decimal is only supported when PHP intl extension is installed.');
         }
