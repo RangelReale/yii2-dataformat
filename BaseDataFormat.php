@@ -53,7 +53,7 @@ class BaseDataFormat extends Component
      */
     public function asRaw($value)
     {
-        if ($value === null) {
+        if ($value === null || $value == '') {
             return null;
         }
         return $value;
@@ -66,7 +66,7 @@ class BaseDataFormat extends Component
      */
     public function asText($value)
     {
-        if ($value === null) {
+        if ($value === null || $value == '') {
             return null;
         }
         return Html::encode($value);
@@ -79,7 +79,7 @@ class BaseDataFormat extends Component
      */
     public function asNtext($value)
     {
-        if ($value === null) {
+        if ($value === null || $value == '') {
             return null;
         }
         return nl2br(Html::encode($value));
@@ -94,7 +94,7 @@ class BaseDataFormat extends Component
      */
     public function asParagraphs($value)
     {
-        if ($value === null) {
+        if ($value === null || $value == '') {
             return null;
         }
         return str_replace('<p></p>', '', '<p>' . preg_replace('/\R{2,}/u', "</p>\n<p>", Html::encode($value)) . '</p>');
@@ -110,7 +110,7 @@ class BaseDataFormat extends Component
      */
     public function asHtml($value, $config = null)
     {
-        if ($value === null) {
+        if ($value === null || $value == '') {
             return null;
         }
         return HtmlPurifier::process($value, $config);
@@ -124,7 +124,7 @@ class BaseDataFormat extends Component
      */
     public function asEmail($value, $options = [])
     {
-        if ($value === null) {
+        if ($value === null || $value == '') {
             return null;
         }
         return Html::mailto(Html::encode($value), $value, $options);
@@ -138,7 +138,7 @@ class BaseDataFormat extends Component
      */
     public function asImage($value, $options = [])
     {
-        if ($value === null) {
+        if ($value === null || $value == '') {
             return null;
         }
         return Html::img($value, $options);
@@ -152,7 +152,7 @@ class BaseDataFormat extends Component
      */
     public function asUrl($value, $options = [])
     {
-        if ($value === null) {
+        if ($value === null || $value == '') {
             return null;
         }
         $url = $value;
