@@ -16,6 +16,10 @@ class DataFormat extends BaseDataFormat
 {
     public $formatter;
 
+    public $dateFormat = 'short';    
+    public $timeFormat = 'short';
+    public $datetimeFormat = 'short';
+    
     private $_intlLoaded = false;
     
     public function init()
@@ -134,6 +138,9 @@ class DataFormat extends BaseDataFormat
         if ($value === null || $value == '') {
             return null;
         }
+        if ($format === null) {
+            $format = $this->dateFormat;
+        }
         return $this->formatter->asDate($value, $format);
     }
 
@@ -145,6 +152,9 @@ class DataFormat extends BaseDataFormat
         if ($value === null || $value == '') {
             return null;
         }
+        if ($format === null) {
+            $format = $this->timeFormat;
+        }
         return $this->formatter->asTime($value, $format);
     }
 
@@ -155,6 +165,9 @@ class DataFormat extends BaseDataFormat
     {
         if ($value === null || $value == '') {
             return null;
+        }
+        if ($format === null) {
+            $format = $this->datetimeFormat;
         }
         return $this->formatter->asDatetime($value, $format);
     }
@@ -287,6 +300,9 @@ class DataFormat extends BaseDataFormat
     public function parseDate($value, $format = null)
     {
         if ($format === null) {
+            $format = $this->dateFormat;
+        }
+        if ($format === null) {
             $format = $this->formatter->dateFormat;
         }
         return $this->parseDateTimeValue($value, $format, 'date');
@@ -298,6 +314,9 @@ class DataFormat extends BaseDataFormat
     public function parseTime($value, $format = null)
     {
         if ($format === null) {
+            $format = $this->timeFormat;
+        }
+        if ($format === null) {
             $format = $this->formatter->timeFormat;
         }
         return $this->parseDateTimeValue($value, $format, 'time');
@@ -308,6 +327,9 @@ class DataFormat extends BaseDataFormat
      */
     public function parseDatetime($value, $format = null)
     {
+        if ($format === null) {
+            $format = $this->datetimeFormat;
+        }
         if ($format === null) {
             $format = $this->formatter->datetimeFormat;
         }
