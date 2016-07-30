@@ -4,6 +4,7 @@ namespace RangelReale\dataformat;
 
 use NumberFormatter;
 use IntlDateFormatter;
+use yii\helpers\FormatConverter;
 
 use yii\base\InvalidParamException;
 use yii\base\InvalidConfigException;
