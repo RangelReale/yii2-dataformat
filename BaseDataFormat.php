@@ -237,6 +237,32 @@ class BaseDataFormat extends Component
     }
 
     /**
+     * Formats the value as a time period.
+     * @param integer $value the value to be formatted. The following
+     * types of value are supported:
+     *
+     * - an integer representing the number of seconds since 00:00:00
+     *
+     * @param string $format the format used to convert the value into a date string.
+     * If null, [[timeperiodFormat]] will be used.
+     *
+     * This can be "short", "medium", "long", or "full", which represents a preset format of different lengths.
+     * It can also be a custom format as specified in the [ICU manual](http://userguide.icu-project.org/formatparse/datetime).
+     *
+     * Alternatively this can be a string prefixed with `php:` representing a format that can be recognized by the
+     * PHP [date()](http://php.net/manual/de/function.date.php)-function.
+     *
+     * @return string the formatted result.
+     * @throws InvalidParamException if the input value can not be evaluated as a date value.
+     * @throws InvalidConfigException if the date format is invalid.
+     * @see timeperiodFormat
+     */
+    public function asTimeperiod($value, $format = null)
+    {
+        return $value;
+    }
+    
+    /**
      * Formats the value as a datetime.
      * @param integer|string|DateTime $value the value to be formatted. The following
      * types of value are supported:
@@ -467,6 +493,25 @@ class BaseDataFormat extends Component
         return $value;
     }
     
+    /**
+     * Formats the value as a bit mask.
+     * @param integer the value to be formatted
+     * @return array a list of the selected bits
+     */
+    function asBitmask($value)
+    {
+        $value = (int)$value;
+
+        $ret = array();
+        for ($i=0; $i<32; $i++)
+        {
+            $p = pow(2, $i);
+            if (($value & $p)==$p)
+                $ret[]=$i;
+        }
+        return $ret;
+    }
+
     
     /**
      * Parses the value based on the given format type.
@@ -557,6 +602,11 @@ class BaseDataFormat extends Component
         return $value;
     }    
     
+    public function parseTimeperiod($value, $format = null)
+    {
+        return $value;
+    }    
+    
     public function parseDatetime($value, $format = null)
     {
         return $value;
@@ -615,5 +665,23 @@ class BaseDataFormat extends Component
     public function parseSize($value, $decimals = null, $options = [], $textOptions = [])
     {
         return $value;
+    }    
+    
+	/**
+	 * Parses the value as a bit mask.
+	 * @param mixed the list of items as an array or comma-delimited string
+	 * @return integer the bit mask
+	 */
+    function parseBitmask($value)
+    {
+        if (!is_array($value))
+            $value = explode(',', $value);
+
+        $ret = 0;
+        foreach ($value as $item)
+        {
+            $ret |= pow(2, $item);
+        }
+        return $ret;
     }    
 }

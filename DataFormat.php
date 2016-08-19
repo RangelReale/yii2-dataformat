@@ -18,6 +18,7 @@ class DataFormat extends BaseDataFormat
 
     public $dateFormat = 'short';    
     public $timeFormat = 'short';
+    public $timeperiodFormat = 'HH:mm:ss';
     public $datetimeFormat = 'short';
     
     private $_intlLoaded = false;
@@ -157,6 +158,25 @@ class DataFormat extends BaseDataFormat
         }
         return $this->formatter->asTime($value, $format);
     }
+    
+    /**
+     * @inheritdoc
+     */
+    public function asTimeperiod($value, $format = null)
+    {
+        if ($value === null || $value === '') {
+            return null;
+        }
+        if ($format === null) {
+            $format = $this->timeperiodFormat;
+        }
+        
+        $hours = intval(intval($value) / 3600);
+        $minutes = intval(($value / 60) % 60);
+        $seconds = intval($value % 60);
+        $dt = mktime($hours, $minutes, $seconds, null, null, null);
+        return $this->formatter->asTime($dt, $format);
+    }
 
     /**
      * @inheritdoc
@@ -293,7 +313,6 @@ class DataFormat extends BaseDataFormat
         return $this->formatter->asSize($value, $decimals, $decimals, $decimals);
     }
     
-    
     /**
      * @inheritdoc
      */
@@ -320,6 +339,19 @@ class DataFormat extends BaseDataFormat
             $format = $this->formatter->timeFormat;
         }
         return $this->parseDateTimeValue($value, $format, 'time');
+    }    
+
+    /**
+     * @inheritdoc
+     */
+    public function parseTimeperiod($value, $format = null)
+    {
+        if ($format === null) {
+            $format = $this->timeperiodFormat;
+        }
+        $timeperiod = $this->parseDateTimeValue($value, $format, 'time');
+        $dt=getdate($timeperiod);
+        return $dt['seconds'] + ($dt['minutes'] * 60) + ($dt['hours'] * 60 * 60);
     }    
     
     /**
