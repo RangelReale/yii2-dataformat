@@ -350,6 +350,9 @@ class DataFormat extends BaseDataFormat
             $format = $this->timeperiodFormat;
         }
         $timeperiod = $this->parseDateTimeValue($value, $format, 'time');
+        if ($timeperiod === null) {
+            return null;
+        }
         $dt=getdate($timeperiod);
         return $dt['seconds'] + ($dt['minutes'] * 60) + ($dt['hours'] * 60 * 60);
     }    
